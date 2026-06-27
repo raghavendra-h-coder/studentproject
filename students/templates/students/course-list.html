@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Available Courses</h1>
+
+<ol>
+{% for course in courses %}
+    {% if forloop.first %}
+        <li>{{course}} (Recommended to start)</li>
+    {% else %}
+        <li>{{course}}</li>
+    {% endif %}
+{% empty %}
+    <li>No Courses Available</li>
+{% endfor %}
+</ol>
+
+</body>
+</html>

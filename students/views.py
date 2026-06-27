@@ -32,3 +32,25 @@ def student_profile(request):
         "is_placed": False
     }
     return render(request, "students/student-profile.html", context)
+
+def course_details(request):
+    context = {
+        "courses": [
+        "Core Python",
+        "Django",
+        "REST API",
+        "Data Analysis"
+        ]
+    }
+    return render(request, "students/course-list.html", context)
+
+def course_details_with_extend(request):
+    context = {
+        "courses": [
+        "Core Python",
+        "Django",
+        "REST API",
+        "Data Analysis"
+        ]
+    }
+    return render(request, "students/extended-course-list.html", context)
