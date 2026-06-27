@@ -7,6 +7,5 @@ urlpatterns = [
     path("<int:id>/", views.student_details),
     path("context-filters/<int:id>/", views.student_details_filters_context),
     path("profile/", views.student_profile),
-    path("courses/", views.course_details),
-    path("courses-with-extend/", views.course_details_with_extend),
+    path("courses/<str:feature_name>", views.course_details_feature_name),
 ]

@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 
@@ -44,7 +45,7 @@ def course_details(request):
     }
     return render(request, "students/course-list.html", context)
 
-def course_details_with_extend(request):
+def course_details_feature_name(request, feature_name):
     context = {
         "courses": [
         "Core Python",
@@ -53,4 +54,9 @@ def course_details_with_extend(request):
         "Data Analysis"
         ]
     }
-    return render(request, "students/extended-course-list.html", context)
+    if feature_name == "extends":
+        return render(request, "students/extended-course-list.html", context)
+    elif feature_name == "includes":
+        return render(request, "students/includes-course-list.html", context)
+    else:
+        return HttpResponse(f"Invalid feature name: {feature_name}")
