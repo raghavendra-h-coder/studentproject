@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p><strong>Student Name:</strong> {{ name }}</p>
+<p><strong>Age:</strong> {{ age }} </p>
+{% if marks >= 90 %}
+    <p>Excellent</p>
+{% elif marks >= 75 %}
+    <p>Very Good</p>
+{% elif marks >= 35 %}
+    <p>Pass</p>
+{% else %}
+    <p>Fail</p>
+{% endif %}
+
+{% if is_placed %}
+    <p><strong>Congratulations! You are placed.</strong></p>
+{% else %}
+    <p><strong>Keep preparing for placements.</strong></p>
+{% endif %}
+</body>
+</html>
