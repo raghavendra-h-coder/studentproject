@@ -8,4 +8,9 @@ urlpatterns = [
     path("context-filters/<int:id>/", views.student_details_filters_context),
     path("profile/", views.student_profile),
     path("courses/<str:feature_name>", views.course_details_feature_name),
+    path("create/", views.create_student, name="create-student"),
+    path("view/", views.student_list, name="student-list"),
+    path("update/<int:id>/", views.update_student, name="update-student"),
+    path("delete/<int:id>/", views.delete_student, name="delete-student"),
+
 ]

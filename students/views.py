@@ -1,5 +1,7 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+
+from students.models import Student
 
 
 # Create your views here.
@@ -60,3 +62,54 @@ def course_details_feature_name(request, feature_name):
         return render(request, "students/includes-course-list.html", context)
     else:
         return HttpResponse(f"Invalid feature name: {feature_name}")
+
+def create_student(request):
+
+    if request.method == "POST":
+
+        name = request.POST.get("name")
+        age = request.POST.get("age")
+        course = request.POST.get("course")
+
+        Student.objects.create(
+            name=name,
+            age=age,
+            course=course
+        )
+        return redirect("student-list")
+
+    return render(request, "students/create-student.html")
+
+def student_list(request):
+    students = Student.objects.all()
+    return render(request, "students/students-list.html", {"students": students})
+
+def update_student(request, id):
+
+    student = get_object_or_404(Student, id=id)
+
+    if request.method == "POST":
+
+        student.name = request.POST.get("name")
+        student.age = request.POST.get("age")
+        student.course = request.POST.get("course")
+
+        student.save()
+
+        return redirect("student-list")
+
+    return render(
+        request,
+        "students/update-student.html",
+        {"student": student}
+    )
+
+def delete_student(request, id):
+
+    student = get_object_or_404(Student, id=id)
+    if request.method == "POST":
+
+        student.delete()
+
+        return redirect("student-list")
+    return render(request, "students/delete-student.html")
