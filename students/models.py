@@ -18,12 +18,17 @@ class Course(models.Model):
         return self.name
 
 #one to many relationship
+"""
+with related_name we can access course.students.all()
+without related_name we can access student.studentFK_set.all()
+"""
 class StudentFK(models.Model):
     name = models.CharField(max_length=100)
     age = models.IntegerField()
     course = models.ForeignKey(
         Course,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name="students"
     )
 
     def __str__(self):
