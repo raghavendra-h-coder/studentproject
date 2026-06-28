@@ -1,0 +1,25 @@
+{% extends "base-bootstrap.html" %}
+
+{% block title %}
+Create Student - ModelForm
+{% endblock %}
+
+{% block content %}
+
+<h2>Create Student (ModelForm)</h2>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button
+        type="submit"
+        class="btn btn-success">
+        Save Student
+    </button>
+
+</form>
+
+{% endblock %}

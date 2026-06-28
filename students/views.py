@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
+from students.forms import StudentForm, StudentModelForm
 from students.models import Student
 
 
@@ -78,11 +79,11 @@ def create_student(request):
         )
         return redirect("student-list")
 
-    return render(request, "students/create-student.html")
+    return render(request, "students/create-student-bs.html")
 
 def student_list(request):
     students = Student.objects.all()
-    return render(request, "students/students-list.html", {"students": students})
+    return render(request, "students/students-list-bs.html", {"students": students})
 
 def update_student(request, id):
 
@@ -113,3 +114,73 @@ def delete_student(request, id):
 
         return redirect("student-list")
     return render(request, "students/delete-student.html")
+
+def student_home(request):
+    return render(request, "students/student-home.html")
+
+def create_student_form(request):
+    if request.method == "POST":
+
+        form = StudentForm(request.POST)
+
+        if form.is_valid():
+            Student.objects.create(
+                name=form.cleaned_data.get("name"),
+                age=form.cleaned_data.get("age"),
+                course=form.cleaned_data.get("course")
+            )
+
+            return redirect("student-list")
+
+    else:
+        form = StudentForm()
+
+    return render(
+        request,
+        "students/create-student-form.html",
+        {"form": form}
+    )
+
+def create_student_modelform(request):
+
+    if request.method == "POST":
+
+        form = StudentModelForm(request.POST)
+
+        if form.is_valid():
+
+            form.save()
+
+            return redirect("student-list")
+
+    else:
+
+        form = StudentModelForm()
+
+    return render(
+        request,
+        "students/create-student-modelform.html",
+        {"form": form}
+    )
+
+def update_student_modelform(request, id):
+
+    student = get_object_or_404(Student, id=id)
+    if request.method == "POST":
+
+        form = StudentModelForm(request.POST, instance=student)
+
+        if form.is_valid():
+
+            form.save()
+
+            return redirect("student-list")
+
+    else:
+        form = StudentModelForm(instance=student)
+
+    return render(
+        request,
+        "students/update-student-modelform.html",
+        {"form": form}
+    )

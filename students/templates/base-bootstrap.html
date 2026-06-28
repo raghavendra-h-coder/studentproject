@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+            Student Management System
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container mt-4">
+
+    <h1 class="text-center text-primary">
+        Student Management System
+    </h1>
+
+    <hr>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+
+    <div class="container-fluid">
+
+        <a class="navbar-brand" href="{% url 'student-home' %}">
+            Student Management System
+        </a>
+
+        <div class="navbar-nav">
+
+            <a class="nav-link" href="{% url 'student-home' %}">
+                Home
+            </a>
+
+            <a class="nav-link" href="{% url 'student-list' %}">
+                Students
+            </a>
+
+            <a class="nav-link" href="#">
+                Courses
+            </a>
+
+            <a class="nav-link" href="#">
+                Contact
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+    <hr>
+
+    {% block content %}
+    {% endblock %}
+
+    <hr>
+
+    <p class="text-center text-muted">
+        Developed by Raghavendra
+    </p>
+
+</div>
+
+</body>
+</html>

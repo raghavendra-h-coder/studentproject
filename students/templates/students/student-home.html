@@ -1,0 +1,31 @@
+{% extends "base-bootstrap.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<h2>Welcome to Student Management System</h2>
+
+<p>This application demonstrates:</p>
+
+<ol>
+    <li>Django Templates</li>
+    <li>CRUD Operations</li>
+    <li>Bootstrap</li>
+    <li>ORM</li>
+    <li>Models</li>
+</ol>
+
+<a href="{% url 'student-list' %}"
+   class="btn btn-primary">
+    View Students
+</a>
+
+<a href="{% url 'create-student' %}"
+   class="btn btn-success">
+    Add Student
+</a>
+
+{% endblock %}

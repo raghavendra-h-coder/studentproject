@@ -1,0 +1,25 @@
+{% extends "base-bootstrap.html" %}
+
+{% block title %}
+Create Student Form
+{% endblock %}
+
+{% block content %}
+
+<h2>Create Student (Django Form)</h2>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button
+        type="submit"
+        class="btn btn-success">
+        Save Student
+    </button>
+
+</form>
+
+{% endblock %}
