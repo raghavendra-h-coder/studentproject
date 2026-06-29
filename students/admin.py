@@ -1,7 +1,7 @@
 
 # Register your models here.
 from django.contrib import admin
-from .models import Student, StudentFK, Course
+from .models import Student, StudentFK, Course, Department, CourseMany
 
 
 # admin.site.register(Student)
@@ -71,3 +71,10 @@ class CourseAdmin(admin.ModelAdmin):
         "fee",
     )
 
+@admin.register(Department)
+class DepartmentAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(CourseMany)
+class CourseManyAdmin(admin.ModelAdmin):
+    pass

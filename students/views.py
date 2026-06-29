@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
-from students.forms import StudentForm, StudentModelForm
-from students.models import Student
+from students.forms import StudentForm, StudentModelForm, StudentDepartmentModelForm, StudentCourseManyToManyModelForm
+from students.models import Student, StudentDepartmentFK, StudentCourse
 
 
 # Create your views here.
@@ -183,4 +183,77 @@ def update_student_modelform(request, id):
         request,
         "students/update-student-modelform.html",
         {"form": form}
+    )
+
+def create_student_department_modelform(request):
+
+    if request.method == "POST":
+
+        form = StudentDepartmentModelForm(request.POST)
+
+        if form.is_valid():
+
+            form.save()
+
+            return redirect("student-list")
+
+    else:
+
+        form = StudentDepartmentModelForm()
+
+    return render(
+        request,
+        "students/create-student-department-modelform.html",
+        {"form": form}
+    )
+
+def update_student_department_modelform(request, id):
+
+    student = get_object_or_404(StudentDepartmentFK, id=id)
+    if request.method == "POST":
+
+        form = StudentDepartmentModelForm(request.POST, instance=student)
+
+        if form.is_valid():
+
+            form.save()
+
+            return redirect("student-list")
+
+    else:
+        form = StudentDepartmentModelForm(instance=student)
+
+    return render(
+        request,
+        "students/update-student-department-modelform.html",
+        {"form": form}
+    )
+
+def create_student_course_manytomany_modelform(request):
+    if request.method == "POST":
+        form = StudentCourseManyToManyModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("student-course-mtm-list")
+    else:
+        form = StudentCourseManyToManyModelForm()
+    return render(request, "students/student-course-mtm-modelform.html", {"form": form})
+
+def update_student_course_manytomany_modelform(request, id):
+    student = get_object_or_404(StudentCourse, id=id)
+    if request.method == "POST":
+        form = StudentCourseManyToManyModelForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect("student-course-mtm-list")
+    else:
+        form = StudentCourseManyToManyModelForm(instance=student)
+    return render(request, "students/student-course-mtm-modelform.html", {"form": form})
+
+def student_course_manytomany_list(request):
+    students = StudentCourse.objects.all()
+    return render(
+        request,
+        "students/student-course-mtm-list.html",
+        {"students": students}
     )

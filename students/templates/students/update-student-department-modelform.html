@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+Update Student Department
+{% endblock %}
+
+{% block content %}
+
+<h2>Update Student Department</h2>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+        Update Student Department
+    </button>
+
+</form>
+
+{% endblock %}
