@@ -12,7 +12,27 @@ Create Student - ModelForm
 
     {% csrf_token %}
 
-    {{ form.as_p }}
+    <p>
+    {{ form.name.label_tag }}
+    {{ form.name }}
+    {{ form.name.errors }}
+    </p>
+
+    <p>
+    {{ form.age.label_tag }}
+    {{ form.age }}
+    {{ form.age.errors }}
+    </p>
+
+    <p>
+    {{ form.course.label_tag }}
+    {{ form.course }}
+    {{ form.course.errors }}
+    </p>
+
+    <p>
+        {{ form.non_field_errors }}
+    </p>
 
     <button
         type="submit"

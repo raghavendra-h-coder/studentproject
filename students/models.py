@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models import ManyToManyField
 
@@ -44,6 +45,11 @@ class Department(models.Model):
 
 class StudentDepartmentFK(models.Model):
     name = models.CharField(max_length=100)
+    age = models.IntegerField(
+        validators=[
+            MinValueValidator(18),
+            MaxValueValidator(60)
+        ])
     department = models.ForeignKey(
             Department,
             on_delete=models.CASCADE,
